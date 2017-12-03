@@ -1,14 +1,13 @@
 # Site settings
-title:       Pixyll
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+title:       Memes.moe
+email:       m@memes.moe
+author:      Cecil Sudo
+description: "An in-depth exploration of modern memetics and internet culture"
 baseurl:     ""
-url:         "http://pixyll.com"
+url:         "http://memes.moe"
 date_format: "%b %-d, %Y"
 header_pages:
  - about.md
- - contact.html
 
 # Google services
 google_verification:
@@ -55,7 +54,7 @@ github_username:
 reddit_username:
 bitbucket_username:
 stackoverflow_id:
-twitter_username:
+twitter_username: removeanime
 skype_username:
 steam_nickname:
 google_plus_id:
