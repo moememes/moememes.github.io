@@ -1,0 +1,27 @@
+---
+layout:     post
+title:      The Dollar Bubble Has Popped
+date:       2017-12-07 07:38:00
+summary:    The Dollar (USD) has been declining in value quickly over the last couple of months. Is it still worth buying? No.
+categories: anime bitcoin cryptocurrency trading politics
+---
+## The dollar has lost almost four times its value in the last couple of months.
+
+On October 17, the price of a dollar was 0.000258 BTC. 
+
+As of December 17th, 7:37am Pacific Time, the price of a dollar is 0.000059 BTC, the lowest the dollar has ever been. In fact, the dollar has lost almost 80% of its value over the last three to four months.
+
+That means you'll need:
+
+1.0 BTC or 16,500 USD to purchase a brand new 2017 Honda Civic LX (if you're good at negotiating)
+0.000148 BTC or 2.5 USD to purchase two McDoubles at McDonalds
+0.058941 BTC or 999 USD to purchase the iPhone X 
+0.000410 BTC or 6.99 USD for a month's worth of anime on Crunchyroll.com
+
+As you can see, it's never been a worse time to purchase the USD, or any other currency. In fact, most of the world's currencies have been losing their value to the BTC. 
+
+The dollar bubble has popped, and it's never been more unwise to buy in.
+
+### [Cecil Sudo](https://medium.com/@sudo_seshiru)
+
+Canadian Lawyer specializing in Japanese Criminal Law
