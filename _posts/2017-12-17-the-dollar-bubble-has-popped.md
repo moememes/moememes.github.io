@@ -22,12 +22,16 @@ As you can see, it's never been a worse time to purchase the USD, or any other c
 
 The dollar bubble has popped, and it's never been more unwise to buy in.
 
-**EDIT** As of 08:25:00 PST the USD has fallen even more, to 0.000052 BTC/USD. 
+**EDIT** As of 08:25 PST the USD has fallen even more, to 0.000052 BTC/USD. 
 
 That means you'll need:
 
 1.0 BTC or 19,000 USD to purchase a brand new 2017 Toyota Camry (if you're good at negotiating)
 
+**EDIT2** As of 08:37 PST Coinbase's trading site, GDAX, has crashed but not before the USD reached an even lower all time low at 0.00005 BTC. 
+
+That means you'll need:
+1.0 BTC or 20,000 USD to purchase a brand new 2017 Toyota Camry with options (if you're good at negotiating)
 
 ### [Cecil Sudo](https://medium.com/@sudo_seshiru)
 
