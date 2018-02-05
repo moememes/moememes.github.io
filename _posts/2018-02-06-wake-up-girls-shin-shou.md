@@ -1,0 +1,10 @@
+---
+layout:     post
+title:      On the excellence of Wake Up, Girls! Shin Shou
+date:       2018-02-06 15:00:00
+summary:    Every anime aspires to be the Anime of the Year. Yet, there are not enough years to give to a certain anime.
+categories: anime AOTY bitcoin politics
+---
+## Wake Up, Girls! Shin Shou review. 
+
+Once in a lifetime you'll come across an anime that truly captures the history and cultural distinctions of the modern world the way a person can subjectively perceive it through our guided field of perspective. I have to admit, I had my doubts when I first learned of this anime. After all, Wake Up Girls? Will this anime even be good? How ignorant was I to even have these thoughts. Little did I know I was about to indulge in what may have been the best 25 minutes of my life every single week. The anime starts out strong. The opening scenes enticed the audience with a captivating enigma. I was so taken aback from the next-generation animation that I almost didn't even realize the underlying symbolism in the ongoing scenes. It wasn't until my twenty sixth viewing of the anime's first two episodes where I finally got my bearings together and was able to focus on the gripping and labyrinthine stratagem. The underlying analogy for 19th century dystopianism and the evangelical deviation of typical orthodoxy was enlightening to say the least. Just when I thought the anime could not get any better, the increasing conflict before the climax began in the last episode. I could not believe the complexity of the story as the main protagonist struggled with the everyday endeavors for a quintessential girl such as the consistent up-hill altercation of the fight against misogyny and the fiscal synergy of opposing interplanetary dynamisms. There I was, gripping to my chair as the conflict of the anime truly began. I am so enticed by the anime that I feel as if I am both practically and relatively apart of the anime. This is a special kind of high that not even the strongest of drugs can give you.
