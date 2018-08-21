@@ -2,7 +2,7 @@
 layout:     post
 title:      Too Much Available Space and the Longevity of Discord Communities
 date:       2018-08-20 20:00:00
-published:  false
+published:  true
 summary:    Discord communities often rarely last
 categories: politics psychology internet communities chat people
 ---
