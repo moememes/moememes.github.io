@@ -3,7 +3,7 @@ layout:     post
 title:      Longevity of Discord Communities
 date:       2018-08-20 20:00:00
 published:  true
-summary:    Discord communities often rarely last
+summary:    Discord communities have a very short lifespan
 categories: politics psychology internet communities chat people
 ---
 
