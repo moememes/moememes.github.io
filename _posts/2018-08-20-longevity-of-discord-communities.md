@@ -7,8 +7,6 @@ summary:    Discord communities have a very short lifespan
 categories: politics psychology internet communities chat people
 ---
 
-### IRC
-
 Before Discord, there was something else that many on the internet used. IRC or Internet Relay Chat is a protocol upon which numerous networks built their communities. IRC culture is vastly different from Discord culture. In IRC, the user connects to one or multiple **IRC servers**. Anyone can then create a **channel** on these IRC servers, or join a channel that someone else has created. These **channels** contain the **community** that the user wishes to join. Whoever created these channels were the owners of the channels, with the IRC protocol supporting an extensive permissions and ban system. IRC does not support GIFs or emojis. It doesn't support voice chat. It doesn't work well with mobile. If you lose connection to the IRC server, you lose out on that conversation. If you wanted something, you had to write it yourself. Being completely textual, even logging in required some form of computer competency.
 
 IRC was created 30 years ago, and many still use it and the network of servers set up almost three decades ago. 
@@ -41,7 +39,3 @@ By condensing the space, users in IRC are forced to interact with each other, wh
 This is why IRC communities last decades, while Discord communities will not. 
 
 There's a lot of other problems with Discord's chat model, but I think this is one that people don't often realize, and is one of the main contributors towards dead communities. 
-
-### [Cecil Sudo](https://medium.com/@sudo_seshiru)
-
-Canadian Lawyer specializing in Japanese Criminal Law

@@ -7,9 +7,6 @@ summary:    In the days of old, people would be bullied for their anime opinions
 categories: anime politics gentrification social_issues policy
 ---
 
-## Thoughts on the Gentrification of Anime
-
-### Now and Then, Here and There
 Today, Saturday February 24th in the Year Of Our Lord 2018 Crunchyroll hosts the Anime Awards, a red-carpet event mimicking the prestige of Hollywood's Academy Awards. Bringing dozens of anime culture figureheads and Youtube "influencers," Crunchyroll hopes to expedite anime's journey from the niche hole-in-the-wall pop culture it was to the mainstream culture phenomenon it will be.  
 
 Anime sure has changed. Just a few decades ago, anime was niche culture; you may be shoved into the locker while trying to talk in Klingon to your friends, but that kid who keeps on talking about his Chinese cartoons like Battle Angel and Gall Force, now there's a real loser. 

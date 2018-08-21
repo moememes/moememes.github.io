@@ -5,7 +5,6 @@ date:       2017-12-07 07:38:00
 summary:    The Dollar (USD) has been declining in value quickly over the last couple of months. Is it still worth buying? No.
 categories: anime bitcoin cryptocurrency trading politics
 ---
-## The dollar has lost almost four times its value in the last couple of months.
 
 On October 17, the price of a dollar was 0.000258 BTC. 
 
@@ -32,7 +31,3 @@ That means you'll need:
 
 That means you'll need:
 1.0 BTC or 20,000 USD to purchase a brand new 2017 Toyota Camry with options (if you're good at negotiating)
-
-### [Cecil Sudo](https://medium.com/@sudo_seshiru)
-
-Canadian Lawyer specializing in Japanese Criminal Law

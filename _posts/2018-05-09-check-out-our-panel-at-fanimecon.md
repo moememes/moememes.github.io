@@ -5,7 +5,6 @@ date:       2018-05-12
 summary:    Featuring a brand new panel, Whitewashing of Anime Culture
 categories: anime politics memes panels conventions
 ---
-# Come learn why increased access to anime and fan cultures might not be a good thing.
 
 We are hosting two panels at Fanimecon this year! We are hosting our typical Animemes talk on Sunday May 27th from 11pm-1am, but we would like to invite you to our brand new panel: Keep Anime Anime - Whitewashing of Anime Culture. 
 

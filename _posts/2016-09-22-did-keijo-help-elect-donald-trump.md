@@ -5,7 +5,6 @@ date:       2016-09-22 12:00:00
 summary:    The alt-right infiltration of anime disguises the plight of Rural White Males through cute anime girls.
 categories: anime politics fascism Keijo!!!!!!!! trump
 ---
-## The alt-right infiltration of anime disguises the plight of Rural White Males through cute anime girls.
 
 ![](https://cdn-images-1.medium.com/max/2000/1*Jmq0QRsmyqEzhkUiW-KDzw.png)
 
@@ -220,7 +219,3 @@ bigotry will not be permitted in this country.
 We will not let *Keijo!!!!!!!!* ruin America any further.
 
 It’s time to take action.
-
-### [Cecil Sudo](https://medium.com/@sudo_seshiru)
-
-Canadian Lawyer specializing in Japanese Criminal Law

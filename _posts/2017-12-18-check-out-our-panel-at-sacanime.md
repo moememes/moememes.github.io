@@ -2,10 +2,9 @@
 layout:     post
 title:      We're having a panel at SacAnime!
 date:       2017-12-18 18:00:00
-summary:    Join us in our SacAnime as we talk anime, memes, and you!
+summary:    What do you get when you cross anime with memes? Animemes! Explore the latest and greatest in anime meme production, proliferation, and consumption!
 categories: anime politics memes panels conventions
 ---
-## What do you get when you cross anime with memes? Animemes! Explore the latest and greatest in anime meme production, proliferation, and consumption!
 
 ![SacAnime18](https://i.imgur.com/BIgRkXM.png)
 
