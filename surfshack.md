@@ -1,3 +1,10 @@
+---
+layout: page
+title: Fuji's Surf Shack
+permalink: /surfshack/
+tags: surfshack
+---
+
 ## Welcome to Fuji's Surf Shack
 
 Fuji's Surf Shack is a community representing the highest level of internet discourse in the Discord ecosystem. We focus in high fidelity content from all our members, and strive to continuously improve our craft. 
