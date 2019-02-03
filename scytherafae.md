@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Welcome to scytherafae
+title: Welcome to Scythera Fae
 permalink: /scytherafae/
 tags: tera
 ---
