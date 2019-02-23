@@ -4,8 +4,6 @@ title: ! 'Animemes: Anime Memes and You!'
 permalink: /animemes/
 tags: animemes
 ---
-
-### What is it? 
 What do you get when you cross anime with memes? Animemes! Explore the latest and greatest in anime meme production, proliferation, and consumption!
 
 With the internet enabling more and more anime fans to share their love for anime every day, it becomes essential to understand the vehicles and devices underlying the global advancement of otaku culture. More specifically, we examine and critique the ways in which memes have shaped online as well as offline anime tastes, opinion, and dialogue. Join us as we talk anime, memes, and how they relate to you!
