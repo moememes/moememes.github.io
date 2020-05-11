@@ -6,8 +6,6 @@ summary:    Gatekeeping keeps the pier from being too cluttered
 categories: culture opinions twitter anime
 ---
 
-### Anime and the lowest common denominator
-
 Certain activities attract certain stereotypes of people. For instance, the main demographic of fishermen tend to be older men who happen to reside in more rural areas. This is not an accident, but rather on purpose. To be able to fish, you require adequate strength, possess the ability to drive yourself, the willingness to be cut and injured, and to be near water which can support wildlife, not something you usually find in large cities. The requirements for participating in this activity select the participants of that activity, as for those individuals the activity has less friction than other activities. It would be difficult to get into fishing if you lived in the Mojave Desert.
 
 I think that the amount of friction preventing or allowing an individual from performing an action drastically affects the likelihood of that action being taken by the individual. Take two people - Alice and Bob. Alice has no tools in her kitchen, while Bob has a fully stocked fridge and all the tools he needs. Bob will be more likely to cook dinner than Alice given all other factors are relatively equal. For Bob, cooking dinner is a simple task as his environment has been set up for less friction for him to cook. However, for Alice, she would have to make trips to the supermarket to purchase tools. The additional mental effort of preparing introduces friction between Alice and her kitchen, making her less likely to use it as much as Bob. 
