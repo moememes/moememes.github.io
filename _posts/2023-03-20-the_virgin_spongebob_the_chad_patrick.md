@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      The Virgin Spongebob and the Chad Patrick
+title:      The Virgin SpongeBob and the Chad Patrick
 date:       2023-03-20 12:00:00
-summary:    The humor of Spongebob in the context of modern memetics
+summary:    The humor of SpongeBob in the context of modern memetics
 categories: culture opinions twitter anime
 ---
 
