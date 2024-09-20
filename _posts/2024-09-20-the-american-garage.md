@@ -2,7 +2,7 @@
 layout:     post
 title:      The American Garage
 date:       2024-09-20 12:00:00
-summary:    The hidden key to America's success: the humble garage
+summary:    The hidden key to America's success is the humble garage
 categories: anime politics memes twitter cities planning illuminati driving highways bathrooms evangelion
 ---
 
