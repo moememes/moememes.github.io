@@ -59,7 +59,9 @@ I'm a guy from Norcal into anime, idols, vtubers, and internet culture. I mainly
 </div>
 
 <p style="max-width: 600px; margin: 2.5rem auto 0; font-size: 0.95rem; color: #111;">
-My other hobbies include road tripping, hiking, and camping with my cat. I also go to conventions a lot — usually AX, Fanimecon, Anime Central, Sakuracon, Offkai Expo, Anime Los Angeles, AnimeNYC, and other small local cons. I go to Japan once in a while too — hit me up if you're around!
+I also go to conventions a lot — usually AX, Fanimecon, Anime Central, Sakuracon, Offkai Expo, Anime Los Angeles, AnimeNYC, and other small local cons. I go to Japan once in a while too — hit me up if you're around!
+
+My other hobbies include road tripping, hiking, and camping with my cat. 
 </p>
 
 </div>
