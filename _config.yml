@@ -124,6 +124,7 @@ sass:
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-redirect-from
 # https://github.com/jekyll/jekyll/issues/2938
 exclude:
   - Gemfile
