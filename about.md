@@ -24,10 +24,6 @@ I'm a guy from Norcal into anime, idols, vtubers, and internet culture. I mainly
     💬 Discord
   </a>
 
-  <a href="https://instagram.com/yangliu239" target="_blank" style="color: #000; font-weight: 600; font-size: 1.1rem; text-decoration: none;">
-    📸 Instagram
-  </a>
-
   <a href="mailto:uguutera@gmail.com" style="color: #000; font-weight: 600; font-size: 1.1rem; text-decoration: none;">
     ✉️ Email
   </a>
