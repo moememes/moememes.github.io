@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Why JP Ticketing Systems Are So Hard
-date:       2016-05-19 12:00:00
+date:       2026-05-19 12:00:00
 summary:    Why do you need a phone number for this stuff?
 categories: anime politics memes twitter cities planning illuminati driving highways bathrooms evangelion
 ---
