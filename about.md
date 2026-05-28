@@ -11,7 +11,7 @@ tags: about
 <h2 style="margin-bottom: 0.25rem;">Hi! I'm Uguu!</h2>
 
 <p style="max-width: 600px; margin: 0 auto; font-size: 0.95rem; color: #111;">
-I'm a guy from Norcal into anime, idols, vtubers, and internet culture. I mainly use Twitter & Discord, please follow and add me!
+I'm a guy from Norcal in my early 30's into anime, idols, vtubers, and internet culture. I mainly use Twitter & Discord, please follow and add me!
 </p>
 
 <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 12px; align-items: center;">
