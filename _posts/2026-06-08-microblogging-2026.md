@@ -8,9 +8,9 @@ categories: anime politics memes twitter cities planning illuminati driving high
 
 Almost two decades ago, I read an article that really was a foundational work in how I based my role in the internet ecosystem. It's always stuck with me, and I truly do think about this all the time and it's something that I always keep in mind when posting.
 
-https://shii.bibanon.org/shii.org/knows/Microblogging.html was written by a certain internet citizen, which was really a response to cultural anthropologist Grant McCracken's post about microblogging being a form of phatic communication.
+[This article](https://shii.bibanon.org/shii.org/knows/Microblogging.html) was written by a certain internet citizen, which was really a response to cultural anthropologist Grant McCracken's post about microblogging being a form of phatic communication.
 
-McCracken still maintains his blog, but his original article was wiped off the web; you can still find it here: https://web.archive.org/web/20070823071126/https://cultureby.com/trilogy/2007/07/how-social-netw.html
+McCracken still maintains his blog, but his original article was wiped off the web; you can still find it [here](https://web.archive.org/web/20070823071126/https://cultureby.com/trilogy/2007/07/how-social-netw.html): 
 
 At the time, Facebook was peaking and Twitter had just begun to pop off. Those were some of the main microblogging sites back in the day, and as the monetization machine hadn't made it truly profitable to gain retweets and shares in the attention economy, posting for the sake of microblogging was still well and alive. Don't think the Twitter post attention economy is like that anymore, unfortunately.
 
