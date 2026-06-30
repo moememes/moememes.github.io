@@ -15,33 +15,43 @@ One of the quirks of *Koi Suru Fortune Cookie* is the opener. They had a black D
 The guy goes:
 
 おい日本のみんな、聞こえてるか？
+
 What's up Japan? Can you hear me?
 
 最近日本は元気無いって？
+
 Is life gettin' you down?
 
 カネがない、仕事がキビシイ、
+
 No money, no job,
 
 イマイチなニュースばっかりだもんな！
+
 Too much bad news?
 
 でもクヨクヨしててもしょうがないだろ？
+
 Well, there's no reason to be down.
 
 いまは立ち上がって踊るのさ！
+
 It's time to get up!
 
 AKB48から、オマエのテンションアガりまくる、最高にホットな新曲だ！
+
 We have a hot new song from AKB48 to make you feel good!
 
 「恋するフォーチュンクッキー」！！！
+
 "Koisuru Fortune Cookie."
 
 踊れ、ニッポンよ
+
 So dance, Japan!
 
 踊り狂っちまえよ！
+
 Crazy!
 
 To a native English speaker, it sounds like stage banter. The gentleman is asking how you're doing! Are you feeling down? Does your life suck? Well, AKB48 is going to cheer you up! Let's get ready for AKB48! It's just another introduction meant to hype you up, to set the stage for a cool performance. And that's what I always assumed they were talking about, but I recently took it upon myself to go through the JP subs, which read a bit differently. I'm not sure if the translation was first written in JP or EN, but the JP subs are more directed.
