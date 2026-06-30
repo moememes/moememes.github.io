@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Koi Suru Fortune Cookie by AKB48
-date:       2026-06-30 12:00:00
+date:       2026-06-29 12:00:00
 summary:    It's really about generating shareholder value
 categories: anime politics memes twitter cities planning illuminati driving highways bathrooms evangelion
 ---
