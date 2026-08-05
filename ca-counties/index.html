@@ -18,17 +18,49 @@
   </head>
   <body>
     <main class="app-shell">
-      <section id="shareBoard" class="share-board" aria-label="Square California county map">
-        <div class="share-sidebar">
-          <header class="share-title">
-            <p class="kicker">My California map</p>
-            <h1>CA <span>Level <strong id="score">0</strong></span></h1>
-          </header>
+      <header class="hero">
+        <div>
+          <p class="kicker">My California map</p>
+          <h1>CA <span>Level <strong id="score">0</strong></span></h1>
+        </div>
+        <p class="hero-copy">
+          How much of the Golden State have you experienced? Select a county,
+          choose a level, and make the map yours.
+        </p>
+      </header>
+
+      <div class="tracker-layout">
+        <aside class="sidebar">
+          <section id="emptyEditor" class="empty-editor">
+            <span class="pointer-icon" aria-hidden="true">↗</span>
+            <div>
+              <p class="eyebrow">Ready to color</p>
+              <h2>Select a county</h2>
+              <p>Click anywhere on the map to choose its travel level.</p>
+            </div>
+          </section>
+
+          <section
+            id="countyEditor"
+            class="county-editor is-hidden"
+            aria-label="Set county level"
+          >
+            <div class="editor-heading">
+              <div>
+                <p class="eyebrow">Selected county</p>
+                <h2 id="selectedCountyName">County</h2>
+              </div>
+              <button id="closeEditor" class="close-button" type="button" aria-label="Close county picker">
+                ×
+              </button>
+            </div>
+            <div id="statusGrid" class="status-grid"></div>
+          </section>
 
           <section class="legend-card" aria-labelledby="legendTitle">
             <div class="card-heading">
               <div>
-                <p class="eyebrow">Color key</p>
+                <p class="eyebrow">The scale</p>
                 <h2 id="legendTitle">Journey levels</h2>
               </div>
               <span class="level-badge">0–5</span>
@@ -36,19 +68,40 @@
             <ol id="legendList" class="legend-list"></ol>
           </section>
 
-          <div class="share-summary">
-            <strong><span id="coloredCount">0</span> of 58 counties colored</strong>
-            <span>memes.moe/county-map</span>
-          </div>
-        </div>
+          <section class="progress-card" aria-label="Map progress">
+            <div class="progress-topline">
+              <span>Counties colored</span>
+              <strong><span id="coloredCount">0</span> / 58</strong>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progressFill"></span>
+            </div>
+            <div class="progress-actions">
+              <span id="saveStatus">Loading your map…</span>
+              <button id="resetMap" type="button" disabled>Reset</button>
+            </div>
+          </section>
+        </aside>
 
-        <div class="share-map-column">
-          <p class="map-count">58 counties</p>
+        <section class="map-card" aria-labelledby="mapHeading">
+          <div class="map-toolbar">
+            <div>
+              <p class="eyebrow">58 counties</p>
+              <h2 id="mapHeading">Choose where you&apos;ve been</h2>
+            </div>
+            <label class="county-finder">
+              <span class="sr-only">Find a county</span>
+              <select id="countyFinder">
+                <option value="">Find a county…</option>
+              </select>
+            </label>
+          </div>
+
           <div class="map-stage">
             <svg
               id="countyMap"
               class="california-map"
-              viewBox="18 60 510 615"
+              viewBox="0 0 560 740"
               role="group"
               aria-label="Interactive map of California counties"
             >
@@ -56,75 +109,12 @@
               <g id="countyLabels" class="county-labels" aria-hidden="true"></g>
             </svg>
           </div>
-        </div>
-      </section>
 
-      <section class="control-dock" aria-labelledby="controlsHeading">
-        <div class="control-toolbar">
-          <div>
-            <p class="eyebrow">Build your map</p>
-            <h2 id="controlsHeading">Choose a county, then set its level</h2>
-          </div>
-          <div class="toolbar-actions">
-            <label class="county-finder">
-              <span class="sr-only">Find a county</span>
-              <select id="countyFinder">
-                <option value="">Find a county…</option>
-              </select>
-            </label>
-            <button id="downloadMap" class="download-button" type="button">
-              Download square PNG
-            </button>
-          </div>
-        </div>
-
-        <div class="control-grid">
-          <div class="editor-area">
-            <section id="emptyEditor" class="empty-editor">
-              <span class="pointer-icon" aria-hidden="true">↗</span>
-              <div>
-                <p class="eyebrow">Ready to color</p>
-                <h2>Select a county</h2>
-                <p>Click a labeled county on the map or use the county finder.</p>
-              </div>
-            </section>
-
-            <section
-              id="countyEditor"
-              class="county-editor is-hidden"
-              aria-label="Set county level"
-            >
-              <div class="editor-heading">
-                <div>
-                  <p class="eyebrow">Selected county</p>
-                  <h2 id="selectedCountyName">County</h2>
-                </div>
-                <button id="closeEditor" class="close-button" type="button" aria-label="Close county picker">
-                  ×
-                </button>
-              </div>
-              <div id="statusGrid" class="status-grid"></div>
-            </section>
-          </div>
-
-          <section class="progress-card" aria-label="Map progress">
-            <div class="progress-topline">
-              <span>Counties colored</span>
-              <strong><span id="controlColoredCount">0</span> / 58</strong>
-            </div>
-            <div class="progress-track" aria-hidden="true">
-              <span id="progressFill"></span>
-            </div>
-            <p class="map-note">
-              Every county is labeled on the square image. Hover for its full name.
-            </p>
-            <div class="progress-actions">
-              <span id="saveStatus">Loading your map…</span>
-              <button id="resetMap" type="button" disabled>Reset map</button>
-            </div>
-          </section>
-        </div>
-      </section>
+          <p class="map-note">
+            Tip: hover for a county name, or use the county finder for the tiny ones.
+          </p>
+        </section>
+      </div>
 
       <footer>
         <span>California County Level Map</span>
