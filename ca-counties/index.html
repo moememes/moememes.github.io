@@ -7,7 +7,7 @@
       name="description"
       content="Color every California county by whether you passed through, alighted, visited, stayed, or lived there."
     />
-    <meta name="theme-color" content="#a9cafa" />
+    <meta name="theme-color" content="#9fc4f8" />
     <title>California County Level Map</title>
     <link
       rel="icon"
@@ -18,108 +18,55 @@
   </head>
   <body>
     <main class="app-shell">
-      <header class="hero">
-        <div>
-          <p class="kicker">My California map</p>
-          <h1>CA <span>Level <strong id="score">0</strong></span></h1>
-        </div>
-        <p class="hero-copy">
-          How much of the Golden State have you experienced? Select a county,
-          choose a level, and make the map yours.
-        </p>
-      </header>
+      <section id="shareBoard" class="map-board" aria-label="Interactive square California county map">
+        <svg
+          id="countyMap"
+          class="california-map"
+          viewBox="18 60 510 615"
+          role="group"
+          aria-label="Interactive map of California counties"
+        >
+          <g id="countyShapes" class="county-shapes"></g>
+          <g id="countyLabels" class="county-labels" aria-hidden="true"></g>
+        </svg>
 
-      <div class="tracker-layout">
-        <aside class="sidebar">
-          <section id="emptyEditor" class="empty-editor">
-            <span class="pointer-icon" aria-hidden="true">↗</span>
+        <section class="map-legend" aria-labelledby="legendTitle">
+          <div class="legend-heading">
             <div>
-              <p class="eyebrow">Ready to color</p>
-              <h2>Select a county</h2>
-              <p>Click anywhere on the map to choose its travel level.</p>
+              <p class="eyebrow">Color key</p>
+              <h2 id="legendTitle">Journey levels</h2>
             </div>
-          </section>
-
-          <section
-            id="countyEditor"
-            class="county-editor is-hidden"
-            aria-label="Set county level"
-          >
-            <div class="editor-heading">
-              <div>
-                <p class="eyebrow">Selected county</p>
-                <h2 id="selectedCountyName">County</h2>
-              </div>
-              <button id="closeEditor" class="close-button" type="button" aria-label="Close county picker">
-                ×
-              </button>
-            </div>
-            <div id="statusGrid" class="status-grid"></div>
-          </section>
-
-          <section class="legend-card" aria-labelledby="legendTitle">
-            <div class="card-heading">
-              <div>
-                <p class="eyebrow">The scale</p>
-                <h2 id="legendTitle">Journey levels</h2>
-              </div>
-              <span class="level-badge">0–5</span>
-            </div>
-            <ol id="legendList" class="legend-list"></ol>
-          </section>
-
-          <section class="progress-card" aria-label="Map progress">
-            <div class="progress-topline">
-              <span>Counties colored</span>
-              <strong><span id="coloredCount">0</span> / 58</strong>
-            </div>
-            <div class="progress-track" aria-hidden="true">
-              <span id="progressFill"></span>
-            </div>
-            <div class="progress-actions">
-              <span id="saveStatus">Loading your map…</span>
-              <button id="resetMap" type="button" disabled>Reset</button>
-            </div>
-          </section>
-        </aside>
-
-        <section class="map-card" aria-labelledby="mapHeading">
-          <div class="map-toolbar">
-            <div>
-              <p class="eyebrow">58 counties</p>
-              <h2 id="mapHeading">Choose where you&apos;ve been</h2>
-            </div>
-            <label class="county-finder">
-              <span class="sr-only">Find a county</span>
-              <select id="countyFinder">
-                <option value="">Find a county…</option>
-              </select>
-            </label>
+            <span>0–5</span>
           </div>
-
-          <div class="map-stage">
-            <svg
-              id="countyMap"
-              class="california-map"
-              viewBox="0 0 560 740"
-              role="group"
-              aria-label="Interactive map of California counties"
-            >
-              <g id="countyShapes" class="county-shapes"></g>
-              <g id="countyLabels" class="county-labels" aria-hidden="true"></g>
-            </svg>
-          </div>
-
-          <p class="map-note">
-            Tip: hover for a county name, or use the county finder for the tiny ones.
-          </p>
+          <ol id="legendList" class="legend-list"></ol>
         </section>
-      </div>
 
-      <footer>
-        <span>California County Level Map</span>
-        <span>Progress is private to this browser.</span>
-      </footer>
+        <header class="map-title">
+          <p>My California map</p>
+          <h1>CA <span>Level <strong id="score">0</strong></span></h1>
+          <div><strong><span id="coloredCount">0</span> / 58</strong> counties colored</div>
+        </header>
+
+        <div id="countyPicker" class="county-picker is-hidden" aria-label="Choose county level">
+          <div class="picker-heading">
+            <strong id="pickerCountyName">County</strong>
+            <button id="closePicker" type="button" aria-label="Close county menu">×</button>
+          </div>
+          <label for="levelSelect">Travel level</label>
+          <select id="levelSelect">
+            <option value="" disabled>Choose a level…</option>
+          </select>
+        </div>
+      </section>
+
+      <div class="map-actions" aria-label="Map actions">
+        <p><strong>Click a county</strong>, then choose its level from the dropdown.</p>
+        <div>
+          <span id="saveStatus">Loading your map…</span>
+          <button id="downloadMap" type="button">Download square PNG</button>
+          <button id="resetMap" type="button" disabled>Reset</button>
+        </div>
+      </div>
     </main>
   </body>
 </html>
