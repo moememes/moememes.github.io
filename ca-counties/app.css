@@ -1,23 +1,24 @@
 :root {
   --ink: #202126;
-  --muted-ink: #5f6470;
-  --sky: #a9cafa;
+  --muted-ink: #52617a;
+  --sky: #9fc4f8;
   --paper: #fffdfa;
-  --paper-blue: #f2f7ff;
   --line: #2f3137;
+  --focus: #174eb5;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
+html,
+body {
+  min-height: 100%;
   background: var(--sky);
 }
 
 body {
   margin: 0;
-  background: var(--sky);
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -28,266 +29,152 @@ select {
 }
 
 button,
-.county,
-select {
+select,
+.county {
   -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible,
 select:focus-visible,
 .county:focus-visible {
-  outline: 3px solid #174eb5;
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 
 .app-shell {
   min-height: 100vh;
-  padding: 42px clamp(18px, 4vw, 64px) 24px;
-  overflow-x: hidden;
+  padding: 28px clamp(10px, 3vw, 44px) 20px;
 }
 
-.hero,
-.tracker-layout,
-footer {
-  width: min(1180px, 100%);
+.map-board,
+.map-actions {
+  width: min(1200px, 100%);
   margin-inline: auto;
 }
 
-.hero {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 42px;
-  margin-bottom: 28px;
+.map-board {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  background-color: var(--sky);
+  background-image: radial-gradient(rgba(45, 61, 87, 0.12) 0.8px, transparent 0.8px);
+  background-size: 16px 16px;
 }
 
-.kicker,
-.eyebrow {
-  margin: 0 0 7px;
+.california-map {
+  position: absolute;
+  top: 1.2%;
+  left: 2%;
+  width: 78%;
+  height: 92%;
+  overflow: visible;
+  filter: drop-shadow(5px 6px 0 rgba(48, 58, 75, 0.15));
+}
+
+.county {
+  cursor: pointer;
+  stroke: var(--line);
+  stroke-linejoin: round;
+  stroke-width: 1.45;
+  transition: filter 100ms ease, stroke-width 100ms ease;
+  vector-effect: non-scaling-stroke;
+}
+
+.county:hover {
+  filter: brightness(0.93);
+  stroke-width: 2.4;
+}
+
+.county.is-selected {
+  filter: brightness(0.9);
+  stroke: #0a2969;
+  stroke-width: 3.2;
+}
+
+.county-label {
+  fill: #24262b;
+  font-size: 8.4px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  paint-order: stroke;
+  pointer-events: none;
+  stroke: rgba(255, 255, 255, 0.96);
+  stroke-linejoin: round;
+  stroke-width: 2.7px;
+  text-anchor: middle;
+}
+
+.county-label.is-compact {
+  font-size: 6.9px;
+}
+
+.county-label.is-tiny {
+  font-size: 5.9px;
+}
+
+.county-label.is-selected {
+  fill: #0a2969;
+}
+
+.map-legend {
+  position: absolute;
+  z-index: 3;
+  top: 8%;
+  right: 3.5%;
+  width: 31%;
+  padding: clamp(14px, 2vw, 23px);
+  border: 2px solid var(--line);
+  border-radius: 5px;
+  background: rgba(255, 253, 250, 0.96);
+}
+
+.legend-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.eyebrow,
+.map-title > p {
+  margin: 0 0 6px;
   color: #334c74;
-  font-size: 0.72rem;
+  font-size: 0.73rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.hero h1 {
+.legend-heading h2 {
   margin: 0;
-  font-size: clamp(3.6rem, 8vw, 7.5rem);
-  font-weight: 900;
-  letter-spacing: -0.07em;
-  line-height: 0.82;
-  text-transform: uppercase;
-}
-
-.hero h1 span {
-  display: inline-block;
-  margin-left: 0.15em;
-  font-weight: 750;
-  letter-spacing: -0.055em;
-}
-
-.hero h1 strong {
-  font-weight: inherit;
-}
-
-.hero-copy {
-  max-width: 390px;
-  margin: 0 0 3px;
-  color: #283c5f;
-  font-size: 1rem;
-  font-weight: 650;
-  line-height: 1.6;
-}
-
-.tracker-layout {
-  display: grid;
-  grid-template-columns: 350px minmax(0, 1fr);
-  gap: 22px;
-  align-items: start;
-}
-
-.sidebar {
-  display: grid;
-  gap: 16px;
-  position: sticky;
-  top: 20px;
-}
-
-.county-editor,
-.empty-editor,
-.legend-card,
-.progress-card,
-.map-card {
-  border: 2px solid var(--line);
-  background: var(--paper);
-  box-shadow: 7px 7px 0 rgba(38, 54, 79, 0.17);
-}
-
-.county-editor,
-.empty-editor,
-.legend-card,
-.progress-card {
-  border-radius: 18px;
-}
-
-.county-editor {
-  padding: 20px;
-}
-
-.editor-heading,
-.card-heading,
-.map-toolbar,
-.progress-topline,
-.progress-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.editor-heading {
-  align-items: start;
-  margin-bottom: 14px;
-}
-
-.editor-heading h2,
-.empty-editor h2,
-.card-heading h2,
-.map-toolbar h2 {
-  margin: 0;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.7vw, 1.35rem);
   letter-spacing: -0.025em;
 }
 
-.close-button {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  padding: 0 0 2px;
-  border: 1.5px solid var(--line);
-  border-radius: 50%;
-  background: white;
-  color: var(--ink);
-  cursor: pointer;
-  font-size: 1.55rem;
-  line-height: 1;
-  place-items: center;
-}
-
-.close-button:hover {
-  background: #edf3fc;
-}
-
-.status-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.status-choice {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-width: 0;
-  padding: 9px;
-  border: 1.5px solid #b7bcc6;
-  border-radius: 10px;
-  background: white;
-  color: var(--ink);
-  cursor: pointer;
-  text-align: left;
-}
-
-.status-choice:hover,
-.status-choice.is-current {
-  border-color: var(--line);
-  box-shadow: 2px 2px 0 var(--line);
-  transform: translate(-1px, -1px);
-}
-
-.status-swatch {
-  flex: 0 0 auto;
-  width: 23px;
-  height: 23px;
-  border: 1.5px solid var(--line);
-  border-radius: 6px;
-}
-
-.status-choice strong,
-.status-choice small {
-  display: block;
-}
-
-.status-choice strong {
-  overflow: hidden;
-  font-size: 0.8rem;
-  text-overflow: ellipsis;
-}
-
-.status-choice small {
-  margin-top: 2px;
-  color: var(--muted-ink);
-  font-size: 0.66rem;
-}
-
-.empty-editor {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  min-height: 128px;
-  padding: 20px;
-  background: var(--paper-blue);
-}
-
-.empty-editor p:last-child {
-  margin: 7px 0 0;
-  color: var(--muted-ink);
-  font-size: 0.82rem;
-  line-height: 1.45;
-}
-
-.pointer-icon {
-  display: grid;
-  flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
-  border: 2px solid var(--line);
-  border-radius: 50%;
-  background: #fac51c;
-  font-size: 1.7rem;
-  font-weight: 900;
-  place-items: center;
-}
-
-.legend-card {
-  padding: 20px;
-}
-
-.level-badge {
-  padding: 5px 9px;
+.legend-heading > span {
+  padding: 4px 8px;
   border: 1.5px solid var(--line);
   border-radius: 999px;
-  background: #dce9fc;
+  background: #e2ecfb;
   font-size: 0.72rem;
   font-weight: 850;
 }
 
 .legend-list {
   display: grid;
-  gap: 4px;
-  margin: 16px 0 0;
+  margin: 14px 0 0;
   padding: 0;
   list-style: none;
 }
 
 .legend-list li {
   display: grid;
-  grid-template-columns: 34px 1fr 24px;
+  grid-template-columns: 38px minmax(0, 1fr) 24px;
   gap: 10px;
   align-items: center;
-  min-height: 44px;
-  border-bottom: 1px solid #d7d9dd;
+  min-height: clamp(43px, 5vw, 55px);
+  border-bottom: 1px solid #d5d8dd;
 }
 
 .legend-list li:last-child {
@@ -295,10 +182,10 @@ footer {
 }
 
 .legend-swatch {
-  width: 32px;
-  height: 22px;
+  width: 36px;
+  height: 25px;
   border: 1.5px solid var(--line);
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .legend-copy strong,
@@ -307,86 +194,116 @@ footer {
 }
 
 .legend-copy strong {
-  font-size: 0.82rem;
+  overflow: hidden;
+  font-size: clamp(0.7rem, 1.3vw, 0.9rem);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .legend-copy small {
   margin-top: 2px;
-  color: var(--muted-ink);
-  font-size: 0.68rem;
+  color: #646a74;
+  font-size: clamp(0.58rem, 0.95vw, 0.72rem);
 }
 
 .legend-level {
-  font-size: 0.85rem;
+  font-size: clamp(0.72rem, 1.2vw, 0.9rem);
   font-weight: 900;
   text-align: right;
 }
 
-.progress-card {
-  padding: 17px 20px;
+.map-title {
+  position: absolute;
+  z-index: 2;
+  bottom: 4.5%;
+  left: 4.5%;
+  width: 47%;
 }
 
-.progress-topline {
-  font-size: 0.78rem;
-  font-weight: 750;
+.map-title h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7.2vw, 5.9rem);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.progress-track {
-  height: 9px;
-  margin: 11px 0 12px;
-  overflow: hidden;
-  border: 1.5px solid var(--line);
-  border-radius: 999px;
-  background: #e8ebef;
+.map-title h1 span {
+  margin-left: 0.1em;
+  font-weight: 760;
+  letter-spacing: -0.045em;
 }
 
-.progress-track span {
-  display: block;
-  height: 100%;
-  width: 0;
-  border-radius: inherit;
-  background: #2f78d6;
-  transition: width 240ms ease;
+.map-title h1 strong {
+  font-weight: inherit;
 }
 
-.progress-actions {
-  color: var(--muted-ink);
-  font-size: 0.66rem;
+.map-title > div {
+  margin-top: 12px;
+  color: #304667;
+  font-size: clamp(0.68rem, 1.25vw, 0.9rem);
 }
 
-.progress-actions button {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: #294e89;
-  cursor: pointer;
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.map-title > div strong {
+  color: var(--ink);
 }
 
-.progress-actions button:disabled {
-  cursor: default;
-  opacity: 0.4;
-}
-
-.map-card {
-  overflow: hidden;
-  border-radius: 24px;
-}
-
-.map-toolbar {
-  padding: 20px 22px;
-  border-bottom: 2px solid var(--line);
+.county-picker {
+  position: absolute;
+  z-index: 20;
+  width: 232px;
+  padding: 13px;
+  border: 2px solid var(--line);
+  border-radius: 5px;
   background: var(--paper);
+  box-shadow: 5px 5px 0 rgba(32, 33, 38, 0.24);
 }
 
-.county-finder select {
-  width: 182px;
-  padding: 9px 34px 9px 11px;
+.picker-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.picker-heading strong {
+  overflow: hidden;
+  font-size: 0.9rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-heading button {
+  width: 25px;
+  height: 25px;
+  padding: 0 0 2px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: white;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.county-picker label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted-ink);
+  font-size: 0.67rem;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.county-picker select {
+  width: 100%;
+  padding: 9px 30px 9px 9px;
   border: 1.5px solid var(--line);
-  border-radius: 9px;
+  border-radius: 3px;
   background: white;
   color: var(--ink);
   cursor: pointer;
@@ -394,239 +311,157 @@ footer {
   font-weight: 700;
 }
 
-.map-stage {
-  display: grid;
-  min-height: 690px;
-  padding: 20px 20px 12px;
-  background-color: #dce9fc;
-  background-image: radial-gradient(rgba(45, 61, 87, 0.13) 0.8px, transparent 0.8px);
-  background-size: 15px 15px;
-  place-items: center;
-}
-
-.california-map {
-  width: min(100%, 590px);
-  max-height: 720px;
-  overflow: visible;
-  filter: drop-shadow(6px 7px 0 rgba(48, 58, 75, 0.17));
-}
-
-.county {
-  stroke: var(--line);
-  stroke-linejoin: round;
-  stroke-width: 1.45;
-  cursor: pointer;
-  transition: filter 100ms ease, stroke-width 100ms ease;
-  vector-effect: non-scaling-stroke;
-}
-
-.county:hover {
-  filter: brightness(0.94);
-  stroke-width: 2.35;
-}
-
-.county.is-selected {
-  filter: brightness(0.91);
-  stroke: #0a2969;
-  stroke-width: 3.2;
-}
-
-.county-label {
-  fill: #26282d;
-  font-size: 7.4px;
-  font-weight: 850;
-  letter-spacing: 0.015em;
-  paint-order: stroke;
-  pointer-events: none;
-  stroke: rgba(255, 255, 255, 0.9);
-  stroke-linejoin: round;
-  stroke-width: 2.6px;
-  text-anchor: middle;
-}
-
-.county-label.is-small {
-  display: none;
-}
-
-.county-label.is-selected {
-  display: block;
-  fill: #0a2969;
-  font-size: 8.5px;
-}
-
-.map-note {
-  margin: 0;
-  padding: 12px 22px 15px;
-  border-top: 1px solid #c6c9ce;
-  background: var(--paper);
-  color: var(--muted-ink);
-  font-size: 0.72rem;
-  text-align: center;
-}
-
-footer {
+.map-actions {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding-top: 28px;
+  padding: 14px 2px 0;
   color: #304667;
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.78rem;
 }
 
-.is-hidden,
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.map-actions p {
+  margin: 0;
+}
+
+.map-actions > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.map-actions button {
+  padding: 8px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.map-actions #downloadMap {
+  background: #fac51c;
+}
+
+.map-actions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.map-actions button:disabled {
+  cursor: default;
+  opacity: 0.42;
 }
 
 .is-hidden {
   display: none !important;
 }
 
-@media (max-width: 930px) {
-  .hero {
-    align-items: start;
-    flex-direction: column;
-    gap: 22px;
+@media (max-width: 700px) {
+  .app-shell {
+    padding: 8px 6px 14px;
   }
 
-  .hero-copy {
-    max-width: 620px;
+  .map-board {
+    border-width: 1.5px;
   }
 
-  .tracker-layout {
-    grid-template-columns: 290px minmax(0, 1fr);
+  .map-legend {
+    top: 4%;
+    right: 2%;
+    width: 34%;
+    padding: 6px;
+    border-width: 1.2px;
+    border-radius: 2px;
   }
 
-  .status-grid {
-    grid-template-columns: 1fr;
+  .eyebrow,
+  .map-title > p {
+    margin-bottom: 2px;
+    font-size: clamp(0.38rem, 1.45vw, 0.58rem);
+    letter-spacing: 0.08em;
   }
 
+  .legend-heading h2 {
+    font-size: clamp(0.55rem, 2.25vw, 0.78rem);
+  }
+
+  .legend-heading > span,
   .legend-copy small {
     display: none;
   }
 
-  .map-stage {
-    min-height: 610px;
-  }
-}
-
-@media (max-width: 720px) {
-  .app-shell {
-    padding: 28px 13px 20px;
+  .legend-list {
+    margin-top: 4px;
   }
 
-  .hero {
-    gap: 18px;
-    margin-bottom: 22px;
-    padding-inline: 5px;
+  .legend-list li {
+    grid-template-columns: clamp(14px, 4.5vw, 22px) minmax(0, 1fr) 10px;
+    gap: 3px;
+    min-height: clamp(21px, 5.7vw, 31px);
   }
 
-  .hero h1 {
-    font-size: clamp(3.1rem, 17vw, 5.6rem);
+  .legend-swatch {
+    width: clamp(14px, 4.5vw, 22px);
+    height: clamp(10px, 3.2vw, 15px);
+    border-width: 1px;
   }
 
-  .hero h1 span {
-    display: block;
-    margin: 0.12em 0 0;
-    font-size: 0.72em;
+  .legend-copy strong,
+  .legend-level {
+    font-size: clamp(0.43rem, 1.7vw, 0.62rem);
   }
 
-  .hero-copy {
-    font-size: 0.9rem;
+  .map-title {
+    bottom: 3%;
+    left: 3%;
+    width: 54%;
   }
 
-  .tracker-layout {
-    display: flex;
-    flex-direction: column;
+  .map-title h1 {
+    font-size: clamp(1.65rem, 8.3vw, 3.2rem);
   }
 
-  .sidebar {
-    display: contents;
+  .map-title > div {
+    margin-top: 4px;
+    font-size: clamp(0.45rem, 1.75vw, 0.65rem);
   }
 
-  .empty-editor {
-    display: none;
+  .county-picker {
+    width: min(220px, 76%);
   }
 
-  .county-editor:not(.is-hidden) {
-    display: block;
-    position: fixed;
-    z-index: 20;
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-    max-width: 520px;
-    margin-inline: auto;
-    box-shadow: 0 10px 45px rgba(14, 25, 44, 0.35);
-  }
-
-  .county-editor .status-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .map-card {
-    order: 1;
-    width: 100%;
-    border-radius: 18px;
-  }
-
-  .legend-card {
-    order: 2;
-    width: 100%;
-  }
-
-  .progress-card {
-    order: 3;
-    width: 100%;
-  }
-
-  .map-toolbar {
+  .map-actions {
     align-items: stretch;
     flex-direction: column;
-    padding: 17px;
+    gap: 9px;
+    padding: 10px 2px 0;
   }
 
-  .county-finder select {
-    width: 100%;
+  .map-actions > div {
+    flex-wrap: wrap;
   }
 
-  .map-stage {
-    min-height: 0;
-    padding: 12px 6px 6px;
-  }
-
-  .california-map {
-    width: 100%;
-    max-height: none;
-  }
-
-  .county-label {
-    font-size: 6.7px;
-  }
-
-  footer {
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
+  #saveStatus {
+    margin-right: auto;
   }
 }
 
-@media (max-width: 390px) {
-  .county-editor .status-choice {
-    padding: 8px 6px;
+@media (max-width: 420px) {
+  .california-map {
+    left: 1%;
+    width: 80%;
   }
 
-  .county-editor .status-swatch {
-    width: 20px;
-    height: 20px;
+  .map-actions > div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  #saveStatus {
+    grid-column: 1 / -1;
   }
 }
 
@@ -634,7 +469,6 @@ footer {
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
 }
