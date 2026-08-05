@@ -5,6 +5,7 @@
   --paper: #fffdfa;
   --paper-blue: #f2f7ff;
   --line: #2f3137;
+  --focus: #174eb5;
 }
 
 * {
@@ -36,33 +37,47 @@ select {
 button:focus-visible,
 select:focus-visible,
 .county:focus-visible {
-  outline: 3px solid #174eb5;
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 
 .app-shell {
   min-height: 100vh;
-  padding: 42px clamp(18px, 4vw, 64px) 24px;
+  padding: 34px clamp(14px, 3vw, 48px) 24px;
   overflow-x: hidden;
 }
 
-.hero,
-.tracker-layout,
+.share-board,
+.control-dock,
 footer {
-  width: min(1180px, 100%);
+  width: min(1200px, 100%);
   margin-inline: auto;
 }
 
-.hero {
+.share-board {
+  display: grid;
+  grid-template-columns: minmax(290px, 33%) minmax(0, 67%);
+  gap: clamp(10px, 2vw, 26px);
+  aspect-ratio: 1;
+  padding: clamp(22px, 3.5vw, 46px);
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: 28px;
+  background-color: var(--sky);
+  background-image: radial-gradient(rgba(45, 61, 87, 0.12) 0.8px, transparent 0.8px);
+  background-size: 16px 16px;
+  box-shadow: 9px 9px 0 rgba(38, 54, 79, 0.18);
+}
+
+.share-sidebar {
   display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 42px;
-  margin-bottom: 28px;
+  min-width: 0;
+  flex-direction: column;
 }
 
 .kicker,
-.eyebrow {
+.eyebrow,
+.map-count {
   margin: 0 0 7px;
   color: #334c74;
   font-size: 0.72rem;
@@ -71,93 +86,308 @@ footer {
   text-transform: uppercase;
 }
 
-.hero h1 {
+.share-title h1 {
   margin: 0;
-  font-size: clamp(3.6rem, 8vw, 7.5rem);
+  font-size: clamp(3.8rem, 8vw, 6.4rem);
   font-weight: 900;
   letter-spacing: -0.07em;
-  line-height: 0.82;
+  line-height: 0.85;
   text-transform: uppercase;
 }
 
-.hero h1 span {
-  display: inline-block;
-  margin-left: 0.15em;
+.share-title h1 span {
+  display: block;
+  margin-top: 0.15em;
+  font-size: 0.58em;
   font-weight: 750;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.045em;
 }
 
-.hero h1 strong {
+.share-title h1 strong {
   font-weight: inherit;
 }
 
-.hero-copy {
-  max-width: 390px;
-  margin: 0 0 3px;
-  color: #283c5f;
-  font-size: 1rem;
-  font-weight: 650;
-  line-height: 1.6;
-}
-
-.tracker-layout {
-  display: grid;
-  grid-template-columns: 350px minmax(0, 1fr);
-  gap: 22px;
-  align-items: start;
-}
-
-.sidebar {
-  display: grid;
-  gap: 16px;
-  position: sticky;
-  top: 20px;
-}
-
-.county-editor,
-.empty-editor,
-.legend-card,
-.progress-card,
-.map-card {
+.legend-card {
+  margin-top: clamp(20px, 4vw, 48px);
+  padding: clamp(14px, 2.1vw, 22px);
   border: 2px solid var(--line);
-  background: var(--paper);
-  box-shadow: 7px 7px 0 rgba(38, 54, 79, 0.17);
-}
-
-.county-editor,
-.empty-editor,
-.legend-card,
-.progress-card {
   border-radius: 18px;
+  background: rgba(255, 253, 250, 0.94);
 }
 
-.county-editor {
-  padding: 20px;
-}
-
-.editor-heading,
 .card-heading,
-.map-toolbar,
+.editor-heading,
+.control-toolbar,
 .progress-topline,
-.progress-actions {
+.progress-actions,
+.toolbar-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
 }
 
-.editor-heading {
-  align-items: start;
-  margin-bottom: 14px;
+.card-heading h2,
+.control-toolbar h2,
+.empty-editor h2,
+.editor-heading h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: -0.025em;
 }
 
-.editor-heading h2,
-.empty-editor h2,
-.card-heading h2,
-.map-toolbar h2 {
+.level-badge {
+  padding: 5px 9px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #dce9fc;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.legend-list {
+  display: grid;
+  gap: 0;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legend-list li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 24px;
+  gap: 10px;
+  align-items: center;
+  min-height: 48px;
+  border-bottom: 1px solid #d7d9dd;
+}
+
+.legend-list li:last-child {
+  border-bottom: 0;
+}
+
+.legend-swatch {
+  width: 32px;
+  height: 22px;
+  border: 1.5px solid var(--line);
+  border-radius: 5px;
+}
+
+.legend-copy strong,
+.legend-copy small {
+  display: block;
+}
+
+.legend-copy strong {
+  overflow: hidden;
+  font-size: 0.82rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.legend-copy small {
+  margin-top: 2px;
+  color: var(--muted-ink);
+  font-size: 0.67rem;
+}
+
+.legend-level {
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-align: right;
+}
+
+.share-summary {
+  display: grid;
+  gap: 5px;
+  margin-top: auto;
+  padding-top: 18px;
+  color: #304667;
+  font-size: 0.78rem;
+}
+
+.share-summary strong {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.share-map-column {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.map-count {
   margin: 0;
-  font-size: 1.2rem;
-  letter-spacing: -0.025em;
+  padding-right: 3px;
+  text-align: right;
+}
+
+.map-stage {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+}
+
+.california-map {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(6px 7px 0 rgba(48, 58, 75, 0.17));
+}
+
+.county {
+  cursor: pointer;
+  stroke: var(--line);
+  stroke-linejoin: round;
+  stroke-width: 1.45;
+  transition: filter 100ms ease, stroke-width 100ms ease;
+  vector-effect: non-scaling-stroke;
+}
+
+.county:hover {
+  filter: brightness(0.94);
+  stroke-width: 2.35;
+}
+
+.county.is-selected {
+  filter: brightness(0.91);
+  stroke: #0a2969;
+  stroke-width: 3.2;
+}
+
+.county-label {
+  fill: #24262b;
+  font-size: 8.4px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  paint-order: stroke;
+  pointer-events: none;
+  stroke: rgba(255, 255, 255, 0.94);
+  stroke-linejoin: round;
+  stroke-width: 2.7px;
+  text-anchor: middle;
+}
+
+.county-label.is-compact {
+  font-size: 6.9px;
+}
+
+.county-label.is-tiny {
+  font-size: 5.9px;
+  letter-spacing: 0;
+}
+
+.county-label.is-selected {
+  fill: #0a2969;
+  font-size: 8.8px;
+}
+
+.control-dock {
+  margin-top: 26px;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 7px 7px 0 rgba(38, 54, 79, 0.17);
+}
+
+.control-toolbar {
+  padding: 20px 22px;
+  border-bottom: 2px solid var(--line);
+  background: var(--paper-blue);
+}
+
+.toolbar-actions {
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.county-finder select {
+  width: 190px;
+  padding: 10px 34px 10px 11px;
+  border: 1.5px solid var(--line);
+  border-radius: 9px;
+  background: white;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.download-button {
+  padding: 10px 15px;
+  border: 1.5px solid var(--line);
+  border-radius: 9px;
+  background: #fac51c;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 850;
+  box-shadow: 2px 2px 0 var(--line);
+}
+
+.download-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--line);
+}
+
+.download-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--line);
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  min-height: 205px;
+}
+
+.editor-area {
+  display: grid;
+  min-width: 0;
+  border-right: 1.5px solid #c6c9ce;
+}
+
+.county-editor,
+.empty-editor {
+  align-self: stretch;
+  padding: 22px;
+}
+
+.empty-editor {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.empty-editor p:last-child {
+  margin: 7px 0 0;
+  color: var(--muted-ink);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.pointer-icon {
+  display: grid;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: #fac51c;
+  font-size: 1.7rem;
+  font-weight: 900;
+  place-items: center;
+}
+
+.editor-heading {
+  align-items: start;
+  margin-bottom: 16px;
 }
 
 .close-button {
@@ -181,7 +411,7 @@ footer {
 
 .status-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -208,8 +438,8 @@ footer {
 
 .status-swatch {
   flex: 0 0 auto;
-  width: 23px;
-  height: 23px;
+  width: 24px;
+  height: 24px;
   border: 1.5px solid var(--line);
   border-radius: 6px;
 }
@@ -231,109 +461,18 @@ footer {
   font-size: 0.66rem;
 }
 
-.empty-editor {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  min-height: 128px;
-  padding: 20px;
-  background: var(--paper-blue);
-}
-
-.empty-editor p:last-child {
-  margin: 7px 0 0;
-  color: var(--muted-ink);
-  font-size: 0.82rem;
-  line-height: 1.45;
-}
-
-.pointer-icon {
-  display: grid;
-  flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
-  border: 2px solid var(--line);
-  border-radius: 50%;
-  background: #fac51c;
-  font-size: 1.7rem;
-  font-weight: 900;
-  place-items: center;
-}
-
-.legend-card {
-  padding: 20px;
-}
-
-.level-badge {
-  padding: 5px 9px;
-  border: 1.5px solid var(--line);
-  border-radius: 999px;
-  background: #dce9fc;
-  font-size: 0.72rem;
-  font-weight: 850;
-}
-
-.legend-list {
-  display: grid;
-  gap: 4px;
-  margin: 16px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.legend-list li {
-  display: grid;
-  grid-template-columns: 34px 1fr 24px;
-  gap: 10px;
-  align-items: center;
-  min-height: 44px;
-  border-bottom: 1px solid #d7d9dd;
-}
-
-.legend-list li:last-child {
-  border-bottom: 0;
-}
-
-.legend-swatch {
-  width: 32px;
-  height: 22px;
-  border: 1.5px solid var(--line);
-  border-radius: 5px;
-}
-
-.legend-copy strong,
-.legend-copy small {
-  display: block;
-}
-
-.legend-copy strong {
-  font-size: 0.82rem;
-}
-
-.legend-copy small {
-  margin-top: 2px;
-  color: var(--muted-ink);
-  font-size: 0.68rem;
-}
-
-.legend-level {
-  font-size: 0.85rem;
-  font-weight: 900;
-  text-align: right;
-}
-
 .progress-card {
-  padding: 17px 20px;
+  padding: 22px;
 }
 
 .progress-topline {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 750;
 }
 
 .progress-track {
-  height: 9px;
-  margin: 11px 0 12px;
+  height: 10px;
+  margin: 13px 0 18px;
   overflow: hidden;
   border: 1.5px solid var(--line);
   border-radius: 999px;
@@ -342,16 +481,23 @@ footer {
 
 .progress-track span {
   display: block;
-  height: 100%;
   width: 0;
+  height: 100%;
   border-radius: inherit;
   background: #2f78d6;
   transition: width 240ms ease;
 }
 
+.map-note {
+  margin: 0 0 22px;
+  color: var(--muted-ink);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
 .progress-actions {
   color: var(--muted-ink);
-  font-size: 0.66rem;
+  font-size: 0.68rem;
 }
 
 .progress-actions button {
@@ -360,7 +506,7 @@ footer {
   background: none;
   color: #294e89;
   cursor: pointer;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 800;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -371,104 +517,11 @@ footer {
   opacity: 0.4;
 }
 
-.map-card {
-  overflow: hidden;
-  border-radius: 24px;
-}
-
-.map-toolbar {
-  padding: 20px 22px;
-  border-bottom: 2px solid var(--line);
-  background: var(--paper);
-}
-
-.county-finder select {
-  width: 182px;
-  padding: 9px 34px 9px 11px;
-  border: 1.5px solid var(--line);
-  border-radius: 9px;
-  background: white;
-  color: var(--ink);
-  cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.map-stage {
-  display: grid;
-  min-height: 690px;
-  padding: 20px 20px 12px;
-  background-color: #dce9fc;
-  background-image: radial-gradient(rgba(45, 61, 87, 0.13) 0.8px, transparent 0.8px);
-  background-size: 15px 15px;
-  place-items: center;
-}
-
-.california-map {
-  width: min(100%, 590px);
-  max-height: 720px;
-  overflow: visible;
-  filter: drop-shadow(6px 7px 0 rgba(48, 58, 75, 0.17));
-}
-
-.county {
-  stroke: var(--line);
-  stroke-linejoin: round;
-  stroke-width: 1.45;
-  cursor: pointer;
-  transition: filter 100ms ease, stroke-width 100ms ease;
-  vector-effect: non-scaling-stroke;
-}
-
-.county:hover {
-  filter: brightness(0.94);
-  stroke-width: 2.35;
-}
-
-.county.is-selected {
-  filter: brightness(0.91);
-  stroke: #0a2969;
-  stroke-width: 3.2;
-}
-
-.county-label {
-  fill: #26282d;
-  font-size: 7.4px;
-  font-weight: 850;
-  letter-spacing: 0.015em;
-  paint-order: stroke;
-  pointer-events: none;
-  stroke: rgba(255, 255, 255, 0.9);
-  stroke-linejoin: round;
-  stroke-width: 2.6px;
-  text-anchor: middle;
-}
-
-.county-label.is-small {
-  display: none;
-}
-
-.county-label.is-selected {
-  display: block;
-  fill: #0a2969;
-  font-size: 8.5px;
-}
-
-.map-note {
-  margin: 0;
-  padding: 12px 22px 15px;
-  border-top: 1px solid #c6c9ce;
-  background: var(--paper);
-  color: var(--muted-ink);
-  font-size: 0.72rem;
-  text-align: center;
-}
-
 footer {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding-top: 28px;
+  padding-top: 27px;
   color: #304667;
   font-size: 0.72rem;
   font-weight: 700;
@@ -490,126 +543,140 @@ footer {
   display: none !important;
 }
 
-@media (max-width: 930px) {
-  .hero {
-    align-items: start;
-    flex-direction: column;
-    gap: 22px;
+@media (max-width: 900px) {
+  .share-board {
+    grid-template-columns: minmax(225px, 36%) minmax(0, 64%);
   }
 
-  .hero-copy {
-    max-width: 620px;
+  .share-title h1 {
+    font-size: clamp(3.2rem, 8vw, 4.7rem);
   }
 
-  .tracker-layout {
-    grid-template-columns: 290px minmax(0, 1fr);
+  .legend-card {
+    margin-top: 18px;
   }
 
-  .status-grid {
-    grid-template-columns: 1fr;
+  .legend-list li {
+    min-height: 40px;
   }
 
   .legend-copy small {
     display: none;
   }
 
-  .map-stage {
-    min-height: 610px;
+  .status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 700px) {
   .app-shell {
-    padding: 28px 13px 20px;
+    padding: 16px 10px 18px;
   }
 
-  .hero {
-    gap: 18px;
-    margin-bottom: 22px;
-    padding-inline: 5px;
-  }
-
-  .hero h1 {
-    font-size: clamp(3.1rem, 17vw, 5.6rem);
-  }
-
-  .hero h1 span {
-    display: block;
-    margin: 0.12em 0 0;
-    font-size: 0.72em;
-  }
-
-  .hero-copy {
-    font-size: 0.9rem;
-  }
-
-  .tracker-layout {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sidebar {
-    display: contents;
-  }
-
-  .empty-editor {
-    display: none;
-  }
-
-  .county-editor:not(.is-hidden) {
-    display: block;
-    position: fixed;
-    z-index: 20;
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-    max-width: 520px;
-    margin-inline: auto;
-    box-shadow: 0 10px 45px rgba(14, 25, 44, 0.35);
-  }
-
-  .county-editor .status-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .map-card {
-    order: 1;
-    width: 100%;
+  .share-board {
+    grid-template-columns: minmax(110px, 38%) minmax(0, 62%);
+    gap: 5px;
+    padding: 12px;
     border-radius: 18px;
+    box-shadow: 5px 5px 0 rgba(38, 54, 79, 0.18);
+  }
+
+  .kicker,
+  .share-sidebar .eyebrow,
+  .map-count {
+    margin-bottom: 3px;
+    font-size: clamp(0.42rem, 1.7vw, 0.62rem);
+    letter-spacing: 0.08em;
+  }
+
+  .share-title h1 {
+    font-size: clamp(1.7rem, 8.7vw, 3.6rem);
   }
 
   .legend-card {
-    order: 2;
-    width: 100%;
+    margin-top: 8px;
+    padding: clamp(6px, 1.8vw, 11px);
+    border-width: 1.5px;
+    border-radius: 10px;
   }
 
-  .progress-card {
-    order: 3;
-    width: 100%;
+  .legend-card .card-heading h2 {
+    font-size: clamp(0.58rem, 2.3vw, 0.86rem);
   }
 
-  .map-toolbar {
+  .level-badge {
+    display: none;
+  }
+
+  .legend-list {
+    margin-top: 5px;
+  }
+
+  .legend-list li {
+    grid-template-columns: clamp(15px, 5vw, 24px) minmax(0, 1fr) 13px;
+    gap: clamp(3px, 1.2vw, 7px);
+    min-height: clamp(24px, 6.3vw, 36px);
+  }
+
+  .legend-swatch {
+    width: clamp(15px, 5vw, 24px);
+    height: clamp(11px, 3.5vw, 16px);
+    border-width: 1px;
+    border-radius: 3px;
+  }
+
+  .legend-copy strong,
+  .legend-level {
+    font-size: clamp(0.47rem, 1.9vw, 0.69rem);
+  }
+
+  .share-summary {
+    gap: 2px;
+    padding-top: 6px;
+    font-size: clamp(0.42rem, 1.55vw, 0.61rem);
+  }
+
+  .share-summary strong {
+    font-size: clamp(0.48rem, 1.85vw, 0.7rem);
+  }
+
+  .county-label {
+    font-size: 7.1px;
+  }
+
+  .county-label.is-compact {
+    font-size: 6.1px;
+  }
+
+  .county-label.is-tiny {
+    font-size: 5.4px;
+  }
+
+  .control-toolbar {
     align-items: stretch;
     flex-direction: column;
     padding: 17px;
   }
 
-  .county-finder select {
+  .toolbar-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .county-finder select,
+  .download-button {
     width: 100%;
   }
 
-  .map-stage {
-    min-height: 0;
-    padding: 12px 6px 6px;
+  .control-grid {
+    grid-template-columns: 1fr;
   }
 
-  .california-map {
-    width: 100%;
-    max-height: none;
-  }
-
-  .county-label {
-    font-size: 6.7px;
+  .editor-area {
+    min-height: 175px;
+    border-right: 0;
+    border-bottom: 1.5px solid #c6c9ce;
   }
 
   footer {
@@ -619,12 +686,37 @@ footer {
   }
 }
 
-@media (max-width: 390px) {
-  .county-editor .status-choice {
+@media (max-width: 430px) {
+  .share-board {
+    grid-template-columns: 40% 60%;
+    padding: 8px;
+  }
+
+  .share-summary span:last-child {
+    display: none;
+  }
+
+  .control-dock {
+    border-radius: 16px;
+  }
+
+  .control-toolbar h2 {
+    font-size: 1rem;
+  }
+
+  .toolbar-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .status-choice {
     padding: 8px 6px;
   }
 
-  .county-editor .status-swatch {
+  .status-swatch {
     width: 20px;
     height: 20px;
   }
