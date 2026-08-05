@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Color every California county by whether you passed through, alighted, visited, stayed, or lived there."
+    />
+    <meta name="theme-color" content="#a9cafa" />
+    <title>California County Level Map</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%BA%EF%B8%8F%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./app.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="kicker">My California map</p>
+          <h1>CA <span>Level <strong id="score">0</strong></span></h1>
+        </div>
+        <p class="hero-copy">
+          How much of the Golden State have you experienced? Select a county,
+          choose a level, and make the map yours.
+        </p>
+      </header>
+
+      <div class="tracker-layout">
+        <aside class="sidebar">
+          <section id="emptyEditor" class="empty-editor">
+            <span class="pointer-icon" aria-hidden="true">↗</span>
+            <div>
+              <p class="eyebrow">Ready to color</p>
+              <h2>Select a county</h2>
+              <p>Click anywhere on the map to choose its travel level.</p>
+            </div>
+          </section>
+
+          <section
+            id="countyEditor"
+            class="county-editor is-hidden"
+            aria-label="Set county level"
+          >
+            <div class="editor-heading">
+              <div>
+                <p class="eyebrow">Selected county</p>
+                <h2 id="selectedCountyName">County</h2>
+              </div>
+              <button id="closeEditor" class="close-button" type="button" aria-label="Close county picker">
+                ×
+              </button>
+            </div>
+            <div id="statusGrid" class="status-grid"></div>
+          </section>
+
+          <section class="legend-card" aria-labelledby="legendTitle">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow">The scale</p>
+                <h2 id="legendTitle">Journey levels</h2>
+              </div>
+              <span class="level-badge">0–5</span>
+            </div>
+            <ol id="legendList" class="legend-list"></ol>
+          </section>
+
+          <section class="progress-card" aria-label="Map progress">
+            <div class="progress-topline">
+              <span>Counties colored</span>
+              <strong><span id="coloredCount">0</span> / 58</strong>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progressFill"></span>
+            </div>
+            <div class="progress-actions">
+              <span id="saveStatus">Loading your map…</span>
+              <button id="resetMap" type="button" disabled>Reset</button>
+            </div>
+          </section>
+        </aside>
+
+        <section class="map-card" aria-labelledby="mapHeading">
+          <div class="map-toolbar">
+            <div>
+              <p class="eyebrow">58 counties</p>
+              <h2 id="mapHeading">Choose where you&apos;ve been</h2>
+            </div>
+            <label class="county-finder">
+              <span class="sr-only">Find a county</span>
+              <select id="countyFinder">
+                <option value="">Find a county…</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="map-stage">
+            <svg
+              id="countyMap"
+              class="california-map"
+              viewBox="0 0 560 740"
+              role="group"
+              aria-label="Interactive map of California counties"
+            >
+              <g id="countyShapes" class="county-shapes"></g>
+              <g id="countyLabels" class="county-labels" aria-hidden="true"></g>
+            </svg>
+          </div>
+
+          <p class="map-note">
+            Tip: hover for a county name, or use the county finder for the tiny ones.
+          </p>
+        </section>
+      </div>
+
+      <footer>
+        <span>California County Level Map</span>
+        <span>Progress is private to this browser.</span>
+      </footer>
+    </main>
+  </body>
+</html>
