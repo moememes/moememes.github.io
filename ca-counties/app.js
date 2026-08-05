@@ -13,24 +13,6 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
     { level: 0, label: "Never been there", short: "Never", detail: "Not yet", color: "#fffdfa" },
   ];
 
-  const LABEL_OVERRIDES = {
-    "06005": { rotate: -32 },
-    "06009": { rotate: -31 },
-    "06041": { rotate: 57 },
-    "06067": { lines: ["SACRA-", "MENTO"] },
-    "06075": { lines: ["SF"] },
-    "06081": { rotate: 67 },
-    "06085": { lines: ["SANTA", "CLARA"] },
-    "06099": { lines: ["STANIS-", "LAUS"] },
-    "06101": { rotate: 66 },
-  };
-
-  const SHARE_IMAGE = {
-    size: 1200,
-    mapBounds: { x: 18, y: 60, width: 510, height: 615 },
-    mapArea: { x: 410, y: 70, width: 780, height: 1060 },
-  };
-
   const STORAGE_KEY = "ca-county-level-map:golden-state:v1";
   const SVG_NS = "http://www.w3.org/2000/svg";
   const levelByValue = Object.fromEntries(LEVELS.map((item) => [item.level, item]));
@@ -42,11 +24,9 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
   const elements = {
     score: document.querySelector("#score"),
     coloredCount: document.querySelector("#coloredCount"),
-    controlColoredCount: document.querySelector("#controlColoredCount"),
     progressFill: document.querySelector("#progressFill"),
     saveStatus: document.querySelector("#saveStatus"),
     resetMap: document.querySelector("#resetMap"),
-    downloadMap: document.querySelector("#downloadMap"),
     countyFinder: document.querySelector("#countyFinder"),
     countyShapes: document.querySelector("#countyShapes"),
     countyLabels: document.querySelector("#countyLabels"),
@@ -59,20 +39,10 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
   };
 
   function splitCountyName(name) {
-    if (name.length < 9 || !name.includes(" ")) return [name];
+    if (name.length < 11 || !name.includes(" ")) return [name];
     const words = name.split(" ");
     if (words.length === 2) return words;
     return [words.slice(0, 2).join(" "), words.slice(2).join(" ")];
-  }
-
-  function getCountyLabel(county) {
-    const override = LABEL_OVERRIDES[county.id] || {};
-    return {
-      x: override.x ?? county.centroid[0],
-      y: override.y ?? county.centroid[1],
-      lines: override.lines || splitCountyName(county.name.toUpperCase()),
-      rotate: override.rotate || 0,
-    };
   }
 
   function isLevel(value) {
@@ -142,7 +112,6 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
     for (const county of COUNTY_DATA) {
       const path = document.createElementNS(SVG_NS, "path");
       path.setAttribute("d", county.path);
-      path.setAttribute("data-county-id", county.id);
       path.setAttribute("tabindex", "0");
       path.setAttribute("role", "button");
       path.classList.add("county");
@@ -160,19 +129,15 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
       pathElements.set(county.id, path);
 
       const label = document.createElementNS(SVG_NS, "text");
-      const labelData = getCountyLabel(county);
-      label.setAttribute("x", labelData.x);
-      label.setAttribute("y", labelData.y - (labelData.lines.length - 1) * 4);
-      if (labelData.rotate) {
-        label.setAttribute("transform", `rotate(${labelData.rotate} ${labelData.x} ${labelData.y})`);
-      }
+      label.setAttribute("x", county.centroid[0]);
+      const lines = splitCountyName(county.name.toUpperCase());
+      label.setAttribute("y", county.centroid[1] - (lines.length - 1) * 4);
       label.classList.add("county-label");
-      if (county.area < 500) label.classList.add("is-tiny");
-      else if (county.area < 1800 || county.name.length > 12) label.classList.add("is-compact");
+      if (county.area < 360) label.classList.add("is-small");
 
-      for (const [index, line] of labelData.lines.entries()) {
+      for (const [index, line] of lines.entries()) {
         const tspan = document.createElementNS(SVG_NS, "tspan");
-        tspan.setAttribute("x", labelData.x);
+        tspan.setAttribute("x", county.centroid[0]);
         tspan.setAttribute("dy", index === 0 ? "0" : "8.5");
         tspan.textContent = line;
         label.append(tspan);
@@ -242,7 +207,6 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
     const count = values.length;
     elements.score.textContent = String(score);
     elements.coloredCount.textContent = String(count);
-    elements.controlColoredCount.textContent = String(count);
     elements.progressFill.style.width = `${(count / COUNTY_DATA.length) * 100}%`;
     elements.resetMap.disabled = count === 0;
   }
@@ -273,218 +237,6 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
     render();
   }
 
-  function roundedRectangle(ctx, x, y, width, height, radius) {
-    const right = x + width;
-    const bottom = y + height;
-    ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(right - radius, y);
-    ctx.quadraticCurveTo(right, y, right, y + radius);
-    ctx.lineTo(right, bottom - radius);
-    ctx.quadraticCurveTo(right, bottom, right - radius, bottom);
-    ctx.lineTo(x + radius, bottom);
-    ctx.quadraticCurveTo(x, bottom, x, bottom - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
-    ctx.closePath();
-  }
-
-  function drawShareLegend(ctx) {
-    const card = { x: 45, y: 252, width: 360, height: 548 };
-    roundedRectangle(ctx, card.x, card.y, card.width, card.height, 24);
-    ctx.fillStyle = "#fffdfa";
-    ctx.fill();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#2f3137";
-    ctx.stroke();
-
-    ctx.fillStyle = "#334c74";
-    ctx.font = "800 16px Arial, Helvetica, sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "alphabetic";
-    ctx.fillText("COLOR KEY", 72, 292);
-
-    ctx.fillStyle = "#202126";
-    ctx.font = "800 27px Arial, Helvetica, sans-serif";
-    ctx.fillText("Journey levels", 72, 327);
-
-    LEVELS.forEach((item, index) => {
-      const centerY = 376 + index * 68;
-      ctx.fillStyle = item.color;
-      ctx.fillRect(72, centerY - 17, 48, 32);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "#2f3137";
-      ctx.strokeRect(72, centerY - 17, 48, 32);
-
-      ctx.fillStyle = "#202126";
-      ctx.font = "700 22px Arial, Helvetica, sans-serif";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "middle";
-      ctx.fillText(item.label, 138, centerY);
-
-      ctx.font = "800 18px Arial, Helvetica, sans-serif";
-      ctx.textAlign = "right";
-      ctx.fillText(String(item.level), 376, centerY);
-
-      if (index < LEVELS.length - 1) {
-        ctx.beginPath();
-        ctx.moveTo(72, centerY + 33);
-        ctx.lineTo(376, centerY + 33);
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = "#d7d9dd";
-        ctx.stroke();
-      }
-    });
-  }
-
-  function drawShareMap(ctx) {
-    const { mapBounds, mapArea } = SHARE_IMAGE;
-    const scale = Math.min(mapArea.width / mapBounds.width, mapArea.height / mapBounds.height);
-    const renderedWidth = mapBounds.width * scale;
-    const renderedHeight = mapBounds.height * scale;
-    const drawX = mapArea.x + (mapArea.width - renderedWidth) / 2;
-    const drawY = mapArea.y + (mapArea.height - renderedHeight) / 2;
-    const offsetX = drawX - mapBounds.x * scale;
-    const offsetY = drawY - mapBounds.y * scale;
-
-    ctx.save();
-    ctx.setTransform(scale, 0, 0, scale, offsetX, offsetY);
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-    ctx.lineWidth = 1.8 / scale;
-    ctx.strokeStyle = "#2f3137";
-
-    for (const county of COUNTY_DATA) {
-      const level = state.levels[county.id] || 0;
-      const countyPath = new Path2D(county.path);
-      ctx.fillStyle = levelByValue[level].color;
-      ctx.fill(countyPath);
-      ctx.stroke(countyPath);
-    }
-    ctx.restore();
-
-    for (const county of COUNTY_DATA) {
-      const label = getCountyLabel(county);
-      let fontSize = 11;
-      if (county.area < 500) fontSize = 8;
-      else if (county.area < 1800 || county.name.length > 12) fontSize = 9.2;
-
-      const lineHeight = fontSize + 1.5;
-      const x = label.x * scale + offsetX;
-      const centerY = label.y * scale + offsetY;
-      const firstY = -((label.lines.length - 1) * lineHeight) / 2;
-
-      ctx.save();
-      ctx.translate(x, centerY);
-      if (label.rotate) ctx.rotate((label.rotate * Math.PI) / 180);
-      ctx.font = `800 ${fontSize}px Arial, Helvetica, sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.lineJoin = "round";
-      ctx.lineWidth = 3.2;
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.96)";
-      ctx.fillStyle = "#24262b";
-
-      label.lines.forEach((line, index) => {
-        const y = firstY + index * lineHeight;
-        ctx.strokeText(line, 0, y);
-        ctx.fillText(line, 0, y);
-      });
-      ctx.restore();
-    }
-  }
-
-  function createSquareImage() {
-    const canvas = document.createElement("canvas");
-    canvas.width = SHARE_IMAGE.size;
-    canvas.height = SHARE_IMAGE.size;
-    const ctx = canvas.getContext("2d");
-    if (!ctx || typeof Path2D === "undefined") return null;
-
-    ctx.fillStyle = "#a9cafa";
-    ctx.fillRect(0, 0, SHARE_IMAGE.size, SHARE_IMAGE.size);
-
-    ctx.fillStyle = "rgba(45, 61, 87, 0.11)";
-    for (let y = 12; y < SHARE_IMAGE.size; y += 18) {
-      for (let x = 12; x < SHARE_IMAGE.size; x += 18) {
-        ctx.beginPath();
-        ctx.arc(x, y, 1.15, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    const score = Object.values(state.levels).reduce((total, level) => total + level, 0);
-    const count = Object.keys(state.levels).length;
-
-    ctx.fillStyle = "#334c74";
-    ctx.font = "800 17px Arial, Helvetica, sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "alphabetic";
-    ctx.fillText("MY CALIFORNIA MAP", 50, 58);
-
-    ctx.fillStyle = "#202126";
-    ctx.font = "900 100px Arial, Helvetica, sans-serif";
-    ctx.fillText("CA", 45, 156);
-    ctx.font = "800 58px Arial, Helvetica, sans-serif";
-    ctx.fillText(`LEVEL ${score}`, 50, 218);
-
-    drawShareLegend(ctx);
-    drawShareMap(ctx);
-
-    ctx.textAlign = "left";
-    ctx.textBaseline = "alphabetic";
-    ctx.fillStyle = "#202126";
-    ctx.font = "800 24px Arial, Helvetica, sans-serif";
-    ctx.fillText(`${count} of 58 counties colored`, 54, 860);
-
-    ctx.fillStyle = "#304667";
-    ctx.font = "700 18px Arial, Helvetica, sans-serif";
-    ctx.fillText("California County Level Map", 54, 1090);
-    ctx.font = "700 16px Arial, Helvetica, sans-serif";
-    ctx.fillText("memes.moe/county-map", 54, 1122);
-
-    return canvas;
-  }
-
-  function downloadSquareImage() {
-    const originalText = elements.downloadMap.textContent;
-    elements.downloadMap.disabled = true;
-    elements.downloadMap.textContent = "Creating PNG…";
-
-    let canvas;
-    try {
-      canvas = createSquareImage();
-    } catch {
-      canvas = null;
-    }
-
-    if (!canvas) {
-      elements.downloadMap.disabled = false;
-      elements.downloadMap.textContent = originalText;
-      window.alert("This browser could not create the image. Try a current version of Chrome, Safari, Firefox, or Edge.");
-      return;
-    }
-
-    canvas.toBlob((blob) => {
-      elements.downloadMap.disabled = false;
-      elements.downloadMap.textContent = originalText;
-      if (!blob) {
-        window.alert("The image could not be created. Please try again.");
-        return;
-      }
-
-      const score = Object.values(state.levels).reduce((total, level) => total + level, 0);
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `california-county-level-${score}.png`;
-      document.body.append(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-    }, "image/png");
-  }
-
   function resetMap() {
     if (!Object.keys(state.levels).length) return;
     if (!window.confirm("Clear every colored county and start over?")) return;
@@ -499,15 +251,10 @@ const COUNTY_DATA = [{"id":"06001","name":"Alameda","path":"M130.807,340.525L132
     if (event.target.value) selectCounty(event.target.value);
     else closeEditor();
   });
-  elements.downloadMap.addEventListener("click", downloadSquareImage);
   elements.resetMap.addEventListener("click", resetMap);
   window.addEventListener("storage", (event) => {
     if (event.key !== STORAGE_KEY) return;
-    try {
-      state.levels = event.newValue ? cleanSavedLevels(JSON.parse(event.newValue)) : {};
-    } catch {
-      state.levels = {};
-    }
+    state.levels = event.newValue ? cleanSavedLevels(JSON.parse(event.newValue)) : {};
     render();
   });
 
