@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How privileged are you?</title>
+<style>
+body{font:16px Arial,sans-serif;max-width:920px;margin:20px auto;padding:0 12px;color:#111;background:#fff}h1{font-size:24px;margin:0 0 12px}#result{position:sticky;top:0;background:white;padding:12px 0;border-bottom:1px solid #aaa;z-index:1}#fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}fieldset{min-width:0;border:1px solid #bbb;padding:10px}legend{font-weight:bold}label{display:flex;gap:6px;align-items:baseline;margin:6px 0;cursor:pointer}input{flex-shrink:0}label span{flex:1}b{white-space:nowrap;font-weight:normal}small{display:block;font-size:13px;color:#555;margin:4px 0}button{margin-left:16px}
+
+#scale{margin:28px 0 20px}#scale h2{font-size:18px;margin:0 0 18px}.scale-bar{position:relative;display:grid;grid-template-columns:repeat(5,1fr);height:16px}.scale-bar span:nth-child(1){background:#ed1924}.scale-bar span:nth-child(2){background:#fb8024}.scale-bar span:nth-child(n+3){background:#23ae4b}#marker{position:absolute;top:-7px;height:30px;width:3px;background:#111;transform:translateX(-50%)}.scale-labels{display:grid;grid-template-columns:repeat(5,1fr);text-align:center;gap:4px;margin-top:12px;font-size:14px;overflow-wrap:anywhere}.scale-labels strong{display:block;margin-bottom:5px}.scale-labels div:nth-child(1){color:#ba101a}.scale-labels div:nth-child(2){color:#a34800}.scale-labels div:nth-child(n+3){color:#15722e}#scale-result{font-weight:bold}
+</style>
+</head>
+<body>
+<h1>How privileged are you?</h1>
+<div id="result"><strong>Final privilege: <output id="total" aria-live="polite">0</output></strong><button type="button" id="reset">Reset</button></div>
+<p>Start at 0. Check the applicable fields to add up the image’s scores.</p>
+<form id="fields"></form>
+<section id="scale" aria-labelledby="scale-heading">
+<h2 id="scale-heading">Privilege scale</h2>
+<div class="scale-bar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><div id="marker"></div></div>
+<div class="scale-labels">
+<div><strong>Below −100</strong>Very disprivileged</div>
+<div><strong>−100 to −1</strong>Non privileged</div>
+<div><strong>0 to 49</strong>Above average</div>
+<div><strong>50 to 100</strong>Privileged</div>
+<div><strong>Over 100</strong>Check it daily</div>
+</div>
+<p id="scale-result" aria-live="polite"></p>
+<small>The marker shows your band. Ranges are clarified to remove the original image’s overlap.</small>
+</section>
+<noscript>Enable JavaScript to use this calculator.</noscript>
+<script>
+'use strict';
+const groups = [
+ ['Race',[
+ ['White',25],['Asian',10],['Latino',-50],['Black',-100,'black'],['Other',-100]]],
+ ['Sex',[
+ ['Male',25],['Female',-50],['Intersex',-75]]],
+ ['Orientation',[
+ ['Straight',20],['Bisexual',10],['Asexual',0],['Gay',-150]]],
+ ['Gender',[
+ ['cis',20],['trans (passable)',10],['genderqueer',-100],['trans',-500]]],
+ ['Country',[
+ ['Europe - Top',25,null,'Norway, Netherlands, Sweden, …'],['United States',20,'us'],['Europe - Meh',15,null,'UK, Germany, …'],['Japan / Australia',15],['China - Urban',10],['Europe - Low',0,null,'France, Spain, Italy, …'],['Europe - Shit',-20,null,'Greece, Ukraine, Poland, …'],['China - Rural / shop',-100],['India',-100],['Africa',-400],['Middle east',-600]],'Other: choose closest.'],
+ ['Religion',[
+ ['Jewish (not Black)',25,'jewish'],['Black and Jewish',-25,'black-jewish','Religion score; select Black under Race too.'],['Christian',5],['Non-religious (outside U.S.)',0,'nonreligious'],['Non-religious (in U.S.)',-20,'nonreligious-us'],['Hindu',-20],['Buddhist',-20],['Sikh',-30],['Muslim',-50]]],
+ ['Status',[
+ ['Plutocrat',50,null,'> $1,000,000,000 net'],['Rich',25,null,'> $1,000,000/year'],['Affluent',10,null,'$100k–250k/year'],['Middle',0,null,'$45k–65k'],['Poor',-25,null,'< $30k/year'],['Homeless or Institutionalized',-250]],'Based on you or your family, in USD.'],
+ ['Disability',[
+ ['Able-bodied',25],['Social Autism',-20,null,'(freebee)'],['Immobile',-30],['Disease',-50],['Deaf',-50],['Retarded',-200],['Blind',-750]],'All that apply.'],
+ ['Attractiveness',[
+ ['9+/10',20],['Attractive face',10],['Overweight',-10],['Ugly face',-20],['Disfigured',-40]]],
+ ['Size',[
+ ['Tall',10],['Normal',0],['Short',-10]]],
+ ['Profession',[
+ ['Inv. Banker',25],['Engineer',10],['Doctor (M.D.)',10],['Technology',5],['Teacher',-5],['Police / Fireman',-10],['Scientist',-15],['None / Other',0]]],
+ ['Extra',[
+ ['Doing this on a Friday or Saturday night',-15],['Can’t add',-30]]]
+];
+const form = document.getElementById('fields');
+const signed = value => value > 0 ? '+' + value : String(value);
+for (const [heading, items, note] of groups) {
+ const fieldset = document.createElement('fieldset');
+ const legend = document.createElement('legend');
+ legend.textContent = heading;
+ fieldset.append(legend);
+ if (note) { const hint = document.createElement('small'); hint.textContent = note; fieldset.append(hint); }
+ for (const [name, value, key, hint] of items) {
+  const label = document.createElement('label');
+  const input = document.createElement('input');
+  input.type = 'checkbox'; input.value = String(value);
+  if (key) input.id = key;
+  const text = document.createElement('span'); text.textContent = name;
+  if (hint) { const small = document.createElement('small'); small.textContent = hint; text.append(small); }
+  const points = document.createElement('b'); points.textContent = signed(value);
+  label.append(input, text, points); fieldset.append(label);
+ }
+ form.append(fieldset);
+}
+function bandFor(total) {
+ return total < -100 ? 0 : total < 0 ? 1 : total < 50 ? 2 : total <= 100 ? 3 : 4;
+}
+function update() {
+ let total = 0;
+ for (const input of form.querySelectorAll('input:checked')) {
+  total += Number(input.value);
+ }
+ document.getElementById('total').textContent = String(total);
+ const band = bandFor(total);
+ const names = ['Very disprivileged', 'Non privileged', 'Above average', 'Privileged', 'Check it daily'];
+ document.getElementById('marker').style.left = (band * 20 + 10) + '%';
+ document.getElementById('scale-result').textContent = total + ' — ' + names[band];
+}
+form.addEventListener('change', update);
+document.getElementById('reset').addEventListener('click', () => { form.reset(); update(); });
+update();
+</script>
+</body>
+</html>
