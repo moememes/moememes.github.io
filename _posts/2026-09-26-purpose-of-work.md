@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      The Purpose of Work is it's Product
+title:      The Purpose of Work is its Product
 date:       2026-09-26 12:00:00
 summary:    I think we've forgotten about that, but China hasn't, yet, maybe. I think that's why they're more likely to embrace AI.
 categories: anime politics memes twitter cities planning illuminati driving highways bathrooms evangelion
