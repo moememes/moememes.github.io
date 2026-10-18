@@ -35,10 +35,15 @@ jobs:
           JEKYLL_ENV: production
         run: |
           python3 scripts/export-blog.py "$RUNNER_TEMP/blog-source"
-          bundle exec jekyll build --source "$RUNNER_TEMP/blog-source" --destination "$RUNNER_TEMP/blog-site"
+          export BUNDLE_GEMFILE="$PWD/Gemfile"
+          cd "$RUNNER_TEMP/blog-source"
+          bundle exec jekyll build --destination "$RUNNER_TEMP/blog-site"
+          cp CNAME "$RUNNER_TEMP/blog-site/CNAME"
           touch "$RUNNER_TEMP/blog-site/.nojekyll"
           test -s "$RUNNER_TEMP/blog-site/index.html"
           test "$(cat "$RUNNER_TEMP/blog-site/CNAME")" = blog.memes.moe
+          grep -q 'class="posts"' "$RUNNER_TEMP/blog-site/index.html"
+          grep -q 'Profile Picture' "$RUNNER_TEMP/blog-site/about/index.html"
 
       - name: Check out blog publishing repository
         uses: actions/checkout@v4
