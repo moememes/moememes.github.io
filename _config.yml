@@ -3,8 +3,13 @@ title:       Memes.moe
 author:      Cecil Sudo
 description: "An in-depth exploration of modern memetics and internet culture"
 baseurl:     ""
-url:         "http://memes.moe"
+url:         "https://memes.moe"
 date_format: "%b %-d, %Y"
+navigation_links:
+  - title: Home
+    url: https://memes.moe/
+  - title: Blog
+    url: https://blog.memes.moe/
 header_pages:
  - about.md
  - contact.html
@@ -118,7 +123,6 @@ markdown:     kramdown
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
 permalink:    /posts/:month-:day-:year/:title:output_ext
-paginate:     4
 sass:
   style: compressed
 plugins:
@@ -130,3 +134,5 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  - scripts
+  - DOMAIN_SETUP.md
