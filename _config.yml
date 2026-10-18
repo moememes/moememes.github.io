@@ -16,8 +16,6 @@ navigation_links:
     url: https://discordapp.com/users/142198382532755456
   - title: Email
     url: mailto:uguutera@gmail.com
-  - title: GF App
-    url: https://docs.google.com/forms/d/1hNmdFJyaf1n63h8Npyi1tAQzLXVJndm37VvKbW-MZgE/edit
 header_pages:
  - about.md
  - contact.html
