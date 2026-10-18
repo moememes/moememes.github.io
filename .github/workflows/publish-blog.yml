@@ -1,0 +1,65 @@
+name: Publish blog
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-blog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out shared source
+        uses: actions/checkout@v4
+        with:
+          path: source
+          persist-credentials: false
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: source
+
+      - name: Prepare and build blog
+        working-directory: source
+        env:
+          JEKYLL_ENV: production
+        run: |
+          python3 scripts/export-blog.py "$RUNNER_TEMP/blog-source"
+          bundle exec jekyll build --source "$RUNNER_TEMP/blog-source" --destination "$RUNNER_TEMP/blog-site"
+          touch "$RUNNER_TEMP/blog-site/.nojekyll"
+          test -s "$RUNNER_TEMP/blog-site/index.html"
+          test "$(cat "$RUNNER_TEMP/blog-site/CNAME")" = blog.memes.moe
+
+      - name: Check out blog publishing repository
+        uses: actions/checkout@v4
+        with:
+          repository: moememes/blog
+          ref: main
+          path: published
+          ssh-key: ${{ secrets.BLOG_DEPLOY_KEY }}
+
+      - name: Publish generated files
+        working-directory: published
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          rsync -a --delete --exclude='.git/' "$RUNNER_TEMP/blog-site/" ./
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all
+          if git diff --cached --quiet; then
+            echo 'Blog is already up to date.'
+          else
+            git commit -m "Publish blog from ${SOURCE_SHA}"
+            git push origin HEAD:main
+          fi

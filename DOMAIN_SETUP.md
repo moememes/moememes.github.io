@@ -1,46 +1,32 @@
-# Domain split: original plan
+# Editing and publishing
 
-- `moememes/moememes.github.io`: profile at `https://memes.moe`.
-- New `moememes/blog` repository: blog at `https://blog.memes.moe`.
+All content is edited in `moememes/moememes.github.io`:
 
-## Prepare the blog
+- Profile: `_includes/profile.html`
+- Blog posts: `_posts/YYYY-MM-DD-title.md`
+- Shared appearance: `_layouts/`, `_includes/`, `css/`, and `_sass/`
 
-Create a public `blog` repository and an empty local checkout outside this
-repository, then run:
+Push to `master` to publish. GitHub Pages updates the profile at `memes.moe`.
+The Publish blog workflow builds a second version with the blog homepage,
+then pushes generated files to `moememes/blog`, which serves `blog.memes.moe`.
+The profile at `/about/` is also rebuilt from the same source on both domains.
 
-    python3 scripts/export-blog.py /path/to/blog
+Do not edit the `blog` repository directly: its current files are automatically
+replaced on publication. Its Git history preserves the original source.
 
-Commit and push that checkout. Enable Pages from its branch/root directory.
-The export includes all posts and restores the current paginated blog homepage.
-Future blog posts should be written in the new repository.
+## Deployment credential
 
-## Switch GitHub Pages domains
+The source repository's Actions secret `BLOG_DEPLOY_KEY` holds an SSH private
+key. Its public key is registered as a write-enabled deploy key only on
+`moememes/blog`. It is not a personal access token.
 
-The current repository is remotely configured for `blog.memes.moe`.
-Release that domain by changing its Pages custom domain to `memes.moe`,
-then set the new blog repository's Pages custom domain to `blog.memes.moe`.
-Publish the prepared profile changes in the current repository during the
-switch. A brief interruption is possible while domains and certificates update.
-Enable Enforce HTTPS for both sites once certificates are available.
+## Troubleshooting
 
-## Dynadot
+Check Actions → Publish blog in the source repository. The workflow builds
+before updating the published files; a failed build leaves the blog unchanged.
+It can also be run manually with Run workflow.
 
-Keep `blog` as CNAME → `moememes.github.io`.
-Replace the `www` Forward record with CNAME → `moememes.github.io`.
-In Domain Records (the apex), replace any forwarding with these four A records:
-
-- `185.199.108.153`
-- `185.199.109.153`
-- `185.199.110.153`
-- `185.199.111.153`
-
-Leave unrelated subdomains, TXT records, and email records unchanged.
-Configure GitHub custom domains before changing DNS. With the apex and www
-configured, GitHub redirects www to memes.moe.
-
-Verify the profile at the apex and www, and the blog homepage, pagination,
-and a post at blog.memes.moe. Existing post files remain in the main repository
-so old article paths continue working.
-
-Remote master currently has a newer CNAME commit. Integrate it before pushing;
-the desired final CNAME in this repository is `memes.moe`.
+Both Pages sites deploy from their branch root: `master` for the source and
+`main` for the generated blog. Keep their custom domains set to `memes.moe`
+and `blog.memes.moe`, respectively, with HTTPS enabled. No DNS changes are
+needed for normal publishing.
