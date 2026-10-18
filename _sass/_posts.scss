@@ -9,7 +9,11 @@
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
-  margin-bottom: $space-2;
+  margin: 0 auto $space-2;
+}
+
+.profile-greeting {
+  text-align: center;
 }
 
 .posts .post {
